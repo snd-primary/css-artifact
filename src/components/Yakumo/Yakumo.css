@@ -11,33 +11,45 @@
 
 .container {
 	width: 800px;
+	/* transform: perspective(1500px) rotateY(40deg); */
 }
+
 .container > svg {
 	width: 100%;
 }
 
+.container:hover {
+	transform: rotateX(calc((var(--ratio-x) - 0.5) * 50deg))
+		rotateY(calc((var(--ratio-y) - 0.5) * -50deg));
+}
+
 .backplate {
-	/* fill: var(--dark-purple); */
-	fill: var(--black);
+	fill: var(--dark-purple);
+	stroke-width: 2px;
+	stroke: var(--white);
+}
+
+.backplate:hover {
+	cursor: pointer;
 }
 
 .lmark-outer {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .lmark-inner {
-	/* fill: var(--dark-blue); */
-	fill: none;
+	fill: var(--dark-blue);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .text-ya-outer {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 
@@ -52,7 +64,6 @@
 @keyframes drawLine {
 	0% {
 		stroke-dashoffset: 3576px;
-		fill: none;
 	}
 	100% {
 		stroke-dashoffset: 0;
@@ -60,95 +71,93 @@
 }
 
 .text-ya-inner {
-	/* fill: var(--green); */
-	fill: none;
+	fill: var(--green);
 }
 
 .text-ku-outer {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .text-ku-inner {
-	/* fill: var(--green); */
-	fill: none;
+	fill: var(--green);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .mo-outer {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .mo-inner {
-	/* fill: var(--green); */
-	fill: none;
+	fill: var(--green);
 }
 
 .cloud1 {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud2 {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud3 {
-	/* fill: var(--pink); */
-	fill: none;
+	fill: var(--pink);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud4 {
-	/* fill: var(--pink); */
-	fill: none;
+	fill: var(--pink);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud5 {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud6 {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud7 {
-	/* fill: var(--pink); */
-	fill: none;
+	fill: var(--pink);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud8 {
-	/* fill: var(--white); */
-	fill: none;
+	fill: var(--white);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }
 
 .cloud9 {
-	/* fill: var(--pink); */
-	fill: none;
+	fill: var(--pink);
+
 	stroke: var(--white);
 	stroke-width: var(--stoke-initial);
 }

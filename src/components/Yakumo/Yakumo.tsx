@@ -1,9 +1,101 @@
+import { useRef } from "react";
+import {
+	useCardAnimation,
+	AnimationConfig,
+} from "../../hooks/useCardAnimation";
 import "./Yakumo.css";
 
+/* type AnimationOptions = {
+	duration: number;
+	delay: number;
+	fill: FillMode | undefined;
+	easing: string;
+} */
+
 function Yakumo() {
+	// const elementRef = useRef<HTMLDivElement>(null);
+
+	//簡単な例
+	/* 	useEffect(() => {
+		const card = elementRef.current;
+
+		if (!card) return;
+
+		const UPDATE = ({ x, y }: { x: number; y: number }) => {
+			const BOUNDS = card.getBoundingClientRect();
+			const posX = x - BOUNDS.x;
+			const posY = y - BOUNDS.y;
+			const ratioX: string = String(posX / BOUNDS.width);
+			const ratioY: string = String(posY / BOUNDS.height);
+			card.style.setProperty("--ratio-x", ratioX);
+			card.style.setProperty("--ratio-y", ratioY);
+		};
+
+		document.body.addEventListener("pointermove", UPDATE);
+	}, []); */
+
+	//WebAnimationAPIを使った例｀
+	/* 	useEffect(() => {
+		const cardEl = elementRef.current;
+		if (!cardEl) return;
+
+		//要素の領域を取得
+		const width = cardEl.clientWidth;
+		const height = cardEl.clientHeight;
+
+		const pSize = 900;
+
+		const animationOptions: AnimationOptions = {
+			duration: 10,
+			delay: 0,
+			fill: "forwards",
+			easing: "ease-out",
+		};
+
+		const getKeyframes = (transform: string): Keyframe[] => [
+			{
+				transform,
+			},
+		];
+
+		const handleMove = (e: MouseEvent) => {
+			//マウスカーソルの座標を取得
+			const xVal = Math.round(e.offsetX);
+			const yVal = Math.round(e.offsetY);
+
+			//mousemove時の変化量を定義
+			const yRotation = 10 * ((xVal - width / 2) / width);
+			const xRotation = 10 * ((yVal - height / 2) / height);
+
+			cardEl.animate(
+				getKeyframes(
+					`perspective(${pSize}px) scale(1) rotateX(${xRotation}deg) rotateY( ${yRotation}deg)`
+				),
+				animationOptions
+			);
+		};
+
+		const handleMouseOut = () => {
+			cardEl.animate(
+				getKeyframes(`perspective(${pSize}px) scale(1) rotateX(0) rotateY(0)`),
+				animationOptions
+			);
+		};
+
+		cardEl.addEventListener("mousemove", handleMove);
+		cardEl.addEventListener("mouseout", handleMouseOut);
+	}, []) */
+
+	const animationConfig: AnimationConfig = {
+		perspective: 1000,
+		rotationFactor: 20,
+		duration: 100,
+		easing: "ease-in",
+	};
+	const cardRef = useCardAnimation(animationConfig);
 	return (
 		<>
-			<div className="container">
+			<div className="container" ref={cardRef}>
 				<svg
 					viewBox="0 0 2017 1565"
 					xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +108,7 @@ function Yakumo() {
 						height="1547"
 						rx="47"
 						stroke="var(--bg-stroke)"
-						stroke-width="17"
+						strokeWidth="17"
 						className="backplate"
 					/>
 					<path
@@ -28,8 +120,8 @@ function Yakumo() {
 						d="M546.5 217.5V192.5C485 199.5 463.119 233 457 258.5C452.428 277.553 455.701 299.212 449.5 317.5C442.906 336.946 427.701 354.766 404 364.5V389.5L546.5 389.665V362.5H452.5C468.5 353.5 477.229 324.597 479.5 300C482.483 267.692 483.292 250.727 499.5 237.5C508.877 229.847 523.41 220.982 546.5 217.5Z"
 					/>
 					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
+						fillRule="evenodd"
+						clipRule="evenodd"
 						d="M522 509.995L505.5 608.495L564.5 607.495L573 839.495H667.5L658.5 605.495H675.5L661 656.495H752L768.5 599.5L774.5 600C785.999 601 783.501 608.493 782.5 611.494L782.5 611.495C780.773 616.677 778.668 624.823 771.5 635.995C758.94 655.572 737.5 682.495 727 694.495H827C862.5 649.998 873.577 616.737 875 586.5C876.041 564.377 867.988 544.568 854 529.5C841.116 515.621 823.549 505.539 795.5 506.495L809 461H717L704.5 506.5L654.5 507.5L652.5 461H558.5L560.5 509L522 509.995ZM528 589.5L538.5 528.5L579.5 527.5L577.5 479.5H635.5L636.5 526.5L717.5 525.5L731 479.5H785L771 524.5L809.5 526C827.254 529.452 844.786 540.698 852.5 564C860.428 587.948 855.303 623.6 818 675.5H766.5C791 647 813 607.624 796 590C791.478 585.312 785 581.5 775.5 581.5H753.5L737.5 637.5H685.5L700.5 586.5L638.5 587.5L647.5 820.5H591.5L582.5 588.5L528 589.5Z"
 						className="text-ya-outer"
 					/>
@@ -46,8 +138,8 @@ function Yakumo() {
 						className="text-ku-inner"
 					/>
 					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
+						fillRule="evenodd"
+						clipRule="evenodd"
 						d="M1288.5 484.5L1363.5 483.5L1368.5 461.5H1479.5L1473.5 482.5H1567.5L1548.5 569.5L1450.5 570.5L1448.5 581.5H1542.5L1523.5 668.5L1425.5 669.5C1424.38 674.986 1422.91 680.753 1421.46 686.472C1416.43 706.24 1411.54 725.44 1421.5 730.5C1424.68 732.115 1428.59 733.375 1433 733.5C1451.99 734.039 1480.81 719.341 1499.5 696.5C1504.46 690.435 1508.25 683.529 1511.5 676.5L1620.5 677.5C1579.01 754.053 1527.67 795.552 1479.5 818.5C1421.78 846 1366 846.77 1339 833C1289 807.5 1287.32 775 1297 739.5C1298.5 734 1315.5 670.5 1315.5 670.5H1244.5L1263.5 583.5L1338.5 582.5L1340.5 571.5H1269.5L1288.5 484.5ZM1293 553L1303.5 503.5L1377.5 502.5L1383 480H1455L1449.5 502L1544 501L1534 551L1436.5 552L1424 601L1519 600L1509 650L1411.5 651C1411.5 651 1400.31 693 1398.5 702C1383.2 778 1479.32 762.293 1523.5 696.5H1586.5C1523.5 797 1389.06 852 1331 805C1320.5 796.5 1310.5 781.5 1312 766.5C1313.5 751.5 1329.97 690.033 1340.5 651.5L1268 652L1278.5 602.5L1353 601.5L1365.5 552.5L1293 553Z"
 						className="mo-outer"
 					/>
