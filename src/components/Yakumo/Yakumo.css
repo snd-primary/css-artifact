@@ -11,16 +11,11 @@
 
 .container {
 	width: 800px;
-	/* transform: perspective(1500px) rotateY(40deg); */
+	transform: rotateX(50deg) rotateY(50deg);
 }
 
 .container > svg {
 	width: 100%;
-}
-
-.container:hover {
-	transform: rotateX(calc((var(--ratio-x) - 0.5) * 50deg))
-		rotateY(calc((var(--ratio-y) - 0.5) * -50deg));
 }
 
 .backplate {

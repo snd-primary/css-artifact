@@ -1,101 +1,15 @@
-import { useRef } from "react";
-import {
-	useCardAnimation,
-	AnimationConfig,
-} from "../../hooks/useCardAnimation";
+import { usePointerMove } from "../../hooks/usePointerMove";
 import "./Yakumo.css";
 
-/* type AnimationOptions = {
-	duration: number;
-	delay: number;
-	fill: FillMode | undefined;
-	easing: string;
-} */
-
 function Yakumo() {
-	// const elementRef = useRef<HTMLDivElement>(null);
-
-	//簡単な例
-	/* 	useEffect(() => {
-		const card = elementRef.current;
-
-		if (!card) return;
-
-		const UPDATE = ({ x, y }: { x: number; y: number }) => {
-			const BOUNDS = card.getBoundingClientRect();
-			const posX = x - BOUNDS.x;
-			const posY = y - BOUNDS.y;
-			const ratioX: string = String(posX / BOUNDS.width);
-			const ratioY: string = String(posY / BOUNDS.height);
-			card.style.setProperty("--ratio-x", ratioX);
-			card.style.setProperty("--ratio-y", ratioY);
-		};
-
-		document.body.addEventListener("pointermove", UPDATE);
-	}, []); */
-
-	//WebAnimationAPIを使った例｀
-	/* 	useEffect(() => {
-		const cardEl = elementRef.current;
-		if (!cardEl) return;
-
-		//要素の領域を取得
-		const width = cardEl.clientWidth;
-		const height = cardEl.clientHeight;
-
-		const pSize = 900;
-
-		const animationOptions: AnimationOptions = {
-			duration: 10,
-			delay: 0,
-			fill: "forwards",
-			easing: "ease-out",
-		};
-
-		const getKeyframes = (transform: string): Keyframe[] => [
-			{
-				transform,
-			},
-		];
-
-		const handleMove = (e: MouseEvent) => {
-			//マウスカーソルの座標を取得
-			const xVal = Math.round(e.offsetX);
-			const yVal = Math.round(e.offsetY);
-
-			//mousemove時の変化量を定義
-			const yRotation = 10 * ((xVal - width / 2) / width);
-			const xRotation = 10 * ((yVal - height / 2) / height);
-
-			cardEl.animate(
-				getKeyframes(
-					`perspective(${pSize}px) scale(1) rotateX(${xRotation}deg) rotateY( ${yRotation}deg)`
-				),
-				animationOptions
-			);
-		};
-
-		const handleMouseOut = () => {
-			cardEl.animate(
-				getKeyframes(`perspective(${pSize}px) scale(1) rotateX(0) rotateY(0)`),
-				animationOptions
-			);
-		};
-
-		cardEl.addEventListener("mousemove", handleMove);
-		cardEl.addEventListener("mouseout", handleMouseOut);
-	}, []) */
-
-	const animationConfig: AnimationConfig = {
-		perspective: 1000,
-		rotationFactor: 20,
-		duration: 100,
-		easing: "ease-in",
-	};
-	const cardRef = useCardAnimation(animationConfig);
+	const { position, handlePointerMove } = usePointerMove();
 	return (
 		<>
-			<div className="container" ref={cardRef}>
+			<h1>
+				x:{position.x} <br />
+				y:{position.y}
+			</h1>
+			<div style={{}} className="container" onPointerMove={handlePointerMove}>
 				<svg
 					viewBox="0 0 2017 1565"
 					xmlns="http://www.w3.org/2000/svg"
