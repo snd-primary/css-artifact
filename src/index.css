@@ -13,8 +13,6 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-@layer reset, base, tokens, recipes, utilities;
-
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

@@ -1,29 +1,30 @@
 const card = document.querySelector(".card");
 
 function handleHover(e) {
-	const rect = card.getBoundingClientRect();
+	const cardRect = card.getBoundingClientRect();
 
-	//clientX -> VW（画面左端）からの、マウスカーソルのX座標を計算
-	//clienty -> VW（画面上端）からの、マウスカーソルのY座標を計算
-	// rect.left → VW（画面左端）と、要素の左端の距離を計算
-	// rect.left → VW（画面上端） と、要素の上端の距離を計算
-	// x → マウス座標から、常に要素とVWの隙間の距離が引かれることになる。そうすると、要素の大きさ分の座標位置が返ってくる。
+	//カードの左端上を起点にした座標を取得
+	const x = e.clientX - cardRect.left;
+	const y = e.clientY - cardRect.top;
 
-	//対象のDOMの左端上を起点にした座標を取得
-	const x = e.clientX - rect.left;
-	const y = e.clientY - rect.top;
+	//カードの中心座標を取得
+	const centerX = cardRect.width / 2;
+	const centerY = cardRect.height / 2;
 
-	const centerX = rect.width / 2;
-	const centerY = rect.height / 2;
+	console.log(centerX);
 
 	const sensitivity = e.pointerType === "pen" ? 20 : 10;
+
 	const rotateX = Math.max(-20, Math.min(20, y - centerY) / sensitivity);
 	const rotateY = Math.max(-20, Math.min(20, centerX - x) / sensitivity);
 
+	const scale = e.pointerType === "pen" ? 1 + e.pressure * 0.1 : 1.05;
+
 	card.style.transform = `
-		perspective(1000px)
+		perspective(1200px)
 		rotateX(${rotateX}deg)
 		rotateY(${rotateY}deg)
+    scale3d(${scale}, ${scale}, ${scale})
 	`;
 }
 

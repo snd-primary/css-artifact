@@ -1,23 +1,13 @@
 import Yakumo from "./components/Yakumo/Yakumo";
-import { css } from "../styled-system/css";
+import { appStyle } from "./styles/app.css";
 
 const App: React.FC = () => {
 	return (
-		<div
-			className={css({
-				display: "grid",
-				placeItems: "center",
-				placeContent: "center",
-				gridTemplateColumns: "1fr",
-				w: "full",
-				h: "100vh",
-				border: `1px solid #ffffff`,
-			})}
-		>
-			<Yakumo />
-			{/* <RAF /> */}
-			{/* <NoobRaf /> */}
-		</div>
+		<>
+			<div className={appStyle}>
+				<Yakumo />
+			</div>
+		</>
 	);
 };
 
